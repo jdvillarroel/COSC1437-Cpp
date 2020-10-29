@@ -1,0 +1,12 @@
+# Files to ignore on Program_1
+**/Debug
+**/.vs
+*.sln
+*.vcxproj
+*.filters
+*.user
+
+# Exceptions
+!*.cpp
+!*.h
+!*.txt
