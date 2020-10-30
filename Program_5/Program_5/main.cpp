@@ -87,16 +87,24 @@ and the current CD month.
 
 */
 
+/*
+	Note: The rules for the name convention used in this program tries to follow the Google C++ Style Guide.
+	More information can be found at: https://google.github.io/styleguide/cppguide.html#C++_Version
+*/
+
 #include	"main.h"
+#include	"checking_account.h"
+#include	"savings_account.h"
+#include	"certificate_of_deposit.h"
 
 
 /********************************** Function Prototypes ******************************************/
 void initMsg(void);
-
+void ProcessMenuSelection(int);
 
 int main()
 {
-	char	selection;
+	int	selection;
 
 
 	//	Displays a initial message on the console
@@ -105,16 +113,26 @@ int main()
 	do
 	{
 
+		//	Menu options
+		cout << "\n********** BANK MANAGMENT SYSTEM MENU **********\n"
+			<< "1  -> \n"
+			<< "2  -> \n"
+			<< "3  -> \n"
+			<< "4  -> \n"
+			<< "5  -> \n"
+			<< "6  -> \n"
+			<< "7  -> \n"
+			<< "8  -> \n"
+			<< "9  -> \n"
+			<< "0  -> Exit" << "\n\n";
+		cout << "Please, enter your selection: ";
+		cin >> selection;
 
-		//	Prompt the user to continue using the program or terminate
-		//	Continue with 'y' or 'Y' and terminates with any other character
-		cout << "Would you like to continue? [y/n]: ";
-		cin.get(selection);
 
 		//	Ignore other characters the user might enter
 		cin.ignore(100, '\n');
 		cout << endl;
-	} while (selection == 'y' || selection == 'Y');
+	} while (selection != 0);
 
 	cout << endl;
 	system("pause");
@@ -135,8 +153,22 @@ void initMsg(void)
 		<< "************************************************************\n\n";
 
 	//Display a brief description of what the program does
-	cout << "PLease, enter all the information requested to calculate\n"
-		<< "shipping cost and cost of painting(if selected) for the\n"
-		<< "order.\n\n";
+	cout << "Bank account managment system.\n\n";
 
+}
+
+/// <summary>
+/// Call the corresponding functions according to the menu selection.
+/// </summary>
+/// <param name="menu_selection"></param>
+void ProcessMenuSelection(int menu_selection)
+{
+	switch (menu_selection)
+	{
+	case 1:
+		break;
+
+	default:
+		break;
+	}
 }
