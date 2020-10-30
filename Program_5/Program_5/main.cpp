@@ -93,44 +93,63 @@ and the current CD month.
 */
 
 #include	"main.h"
+#include	"bank_account.h"
 #include	"checking_account.h"
 #include	"savings_account.h"
 #include	"certificate_of_deposit.h"
 
+//============================================================
+//					Class Instances Definition
+//============================================================
+ServiceChargeChecking sc_checking("Jesus Villarroel", 9876543210, 5000);
+NoServiceChargeChecking no_sc_checking("Jesus Villarroel", 9876123450, 5000);
+HighInterestChecking hi_checking("Jesus Villarroel", 9876012345, 10000);
 
-/********************************** Function Prototypes ******************************************/
+//============================================================
+//					Function prototypes
+//============================================================
 void initMsg(void);
-void ProcessMenuSelection(int);
+void MenuSelection(int);
 
 int main()
 {
-	int	selection;
-
+	int selection;
 
 	//	Displays a initial message on the console
 	initMsg();
 
-	do
-	{
+	//	Menu options
+	cout << "\n********** BANK MANAGMENT SYSTEM MENU **********\n"
+		<< "1  -> Service Charge Checking Account Deposit.\n"
+		<< "2  -> Service Charge Checking Account Withdrawal.\n"
+		<< "3  -> Service Charge Checking Account Write Check.\n"
+		<< "4  -> Service Charge Checking Account Monthly Statement.\n"
+		<< "5  -> No Service Charge Checking Account Deposit.\n"
+		<< "6  -> No Service Charge Checking Account Withdrawal.\n"
+		<< "7  -> No Service Charge Checking Account Write Check.\n"
+		<< "8  -> No Service Charge Checking Account Monthly Statement.\n"
+		<< "9  -> High Interest Checking Account Deposit.\n"
+		<< "10 -> High Interest Checking Account Withdrawal.\n"
+		<< "11 -> High Interest Checking Account Write Check.\n"
+		<< "12 -> High Interest Checking Account Monthly Statement.\n"
+		<< "13 -> Savings Account Deposit.\n"
+		<< "14 -> Savings Account Withdrawal.\n"
+		<< "15 -> Savings Account Monthly Statement.\n"
+		<< "16 -> High Interest Savings Account Deposit.\n"
+		<< "17 -> High Interest Savings Account Withdrawal.\n"
+		<< "18 -> High Interest Savings Account Monthly Statement.\n"
+		<< "0  -> Exit" << "\n\n";
 
-		//	Menu options
-		cout << "\n********** BANK MANAGMENT SYSTEM MENU **********\n"
-			<< "1  -> \n"
-			<< "2  -> \n"
-			<< "3  -> \n"
-			<< "4  -> \n"
-			<< "5  -> \n"
-			<< "6  -> \n"
-			<< "7  -> \n"
-			<< "8  -> \n"
-			<< "9  -> \n"
-			<< "0  -> Exit" << "\n\n";
+	do
+	{		
 		cout << "Please, enter your selection: ";
 		cin >> selection;
 
-
 		//	Ignore other characters the user might enter
 		cin.ignore(100, '\n');
+
+		MenuSelection(selection);
+
 		cout << endl;
 	} while (selection != 0);
 
@@ -157,15 +176,81 @@ void initMsg(void)
 
 }
 
+
 /// <summary>
 /// Call the corresponding functions according to the menu selection.
 /// </summary>
 /// <param name="menu_selection"></param>
-void ProcessMenuSelection(int menu_selection)
+void MenuSelection(int menu_selection)
 {
+	double amount;
+
 	switch (menu_selection)
 	{
 	case 1:
+		cout << "Enter the amount to deposit: ";
+		cin >> amount;
+		sc_checking.Deposit(amount);
+		break;
+
+	case 2:
+		cout << "Enter the amount to withdraw: ";
+		cin >> amount;
+		sc_checking.Withdraw(amount);
+		break;
+
+	case 3:
+		cout << "Enter the check amount: ";
+		cin >> amount;
+		sc_checking.WriteCheck(amount);
+		break;
+
+	case 4:
+		sc_checking.MonthlyStatement();
+		break;
+
+	case 5:
+		cout << "Enter the amount to deposit: ";
+		cin >> amount;
+		no_sc_checking.Deposit(amount);
+		break;
+
+	case 6:
+		cout << "Enter the amount to withdraw: ";
+		cin >> amount;
+		no_sc_checking.Withdraw(amount);
+		break;
+		
+	case 7:
+		cout << "Enter the check amount: ";
+		cin >> amount;
+		no_sc_checking.WriteCheck(amount);
+		break;
+
+	case 8:
+		no_sc_checking.MonthlyStatement();
+		break;
+
+	case 9:
+		cout << "Enter the amount to deposit: ";
+		cin >> amount;
+		hi_checking.Deposit(amount);
+		break;
+
+	case 10:
+		cout << "Enter the amount to withdraw: ";
+		cin >> amount;
+		hi_checking.Withdraw(amount);
+		break;
+
+	case 11:
+		cout << "Enter the check amount: ";
+		cin >> amount;
+		hi_checking.WriteCheck(amount);
+		break;
+
+	case 12:
+		hi_checking.MonthlyStatement();
 		break;
 
 	default:

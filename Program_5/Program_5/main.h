@@ -9,6 +9,7 @@
 #include	<iomanip>
 #include	<string>
 #include	<Windows.h>
+#include	<math.h>
 
 //	Basic namespace needed
 

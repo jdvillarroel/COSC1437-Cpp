@@ -8,6 +8,7 @@ BankAccount::BankAccount()
 	name_ = "Sample Name";
 	account_number_ = 1234567890;
 	balance_ = 0.0;
+	is_active = true;
 }
 
 /// <summary>
@@ -21,6 +22,7 @@ BankAccount::BankAccount(string name, long long int account_number, double balan
 	name_ = name;
 	account_number_ = account_number;
 	balance_ = balance;
+	is_active = true;
 }
 
 /// <summary>
@@ -86,7 +88,10 @@ long long int BankAccount::GetAccountNumber(void)
 /// <param name="deposit"></param>
 void BankAccount::Deposit(double deposit_amount)
 {
-	balance_ += deposit_amount;
+	if (deposit_amount > 0)
+		balance_ += deposit_amount;
+	else
+		cout << "Amount to deposit must be greater than zero.\n";
 }
 
 /// <summary>
@@ -105,5 +110,5 @@ void BankAccount::MonthlyStatement(void)
 	cout << "Customer name: " << name_ << "\n";
 	cout << "Account Number: #" << account_number_ << "\n";
 	cout << fixed << showpoint << setprecision(2);
-	cout << "Account Balance: $" << balance_ << "\n\n";
+	cout << "Account Balance: $" << balance_ << "\n";
 }
