@@ -88,6 +88,7 @@ long long int BankAccount::GetAccountNumber(void)
 /// <param name="deposit"></param>
 void BankAccount::Deposit(double deposit_amount)
 {
+	//	Only amounts greater than zero are allowed.
 	if (deposit_amount > 0)
 		balance_ += deposit_amount;
 	else
@@ -103,9 +104,13 @@ void BankAccount::Withdraw(double withdraw_amount)
 	balance_ -= withdraw_amount;
 }
 
+/// <summary>
+/// Prints basic information related to the bank account(common to all account types).
+/// </summary>
+/// <param name=""></param>
 void BankAccount::MonthlyStatement(void)
 {
-	cout << "********** MONTHLY STATEMENT **********\n\n";
+	cout << "\n********** MONTHLY STATEMENT **********\n\n";
 
 	cout << "Customer name: " << name_ << "\n";
 	cout << "Account Number: #" << account_number_ << "\n";

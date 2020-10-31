@@ -101,12 +101,18 @@ and the current CD month.
 //============================================================
 //					Class Instances Definition
 //============================================================
+
+//	Arguments: Account holder name, Account number, initial balance
 ServiceChargeChecking sc_checking("Jesus Villarroel", 9876543210, 5000);
 NoServiceChargeChecking no_sc_checking("Jesus Villarroel", 9876123450, 5000);
-HighInterestChecking hi_checking("Jesus Villarroel", 9876012345, 10000);
+HighInterestChecking hi_checking("Jesus Villarroel", 9876012345, 7000);
 
+//	Arguments: Account holder name, Account number, initial balance
 SavingsAccount savings("Jesus Villarroel", 1234567890, 3000);
 HighInterestSavings hi_savings("Jesus Villarroel", 1234098765, 8000);
+
+//	Arguments: Account holder name, Account number, initial balance, maturity months
+CertificateOfDeposit CD("Jesus Villarroel", 1234987605, 10000, 6);
 
 //============================================================
 //					Function prototypes
@@ -141,6 +147,8 @@ int main()
 		<< "16 -> High Interest Savings Account Deposit.\n"
 		<< "17 -> High Interest Savings Account Withdrawal.\n"
 		<< "18 -> High Interest Savings Account Monthly Statement.\n"
+		<< "19 -> Certificate of Deposit(CD) Withdrawal.\n"
+		<< "20 -> Certificate of Deposit(CD) Monthly Statement.\n"
 		<< "0  -> Exit" << "\n\n";
 
 	do
@@ -288,7 +296,22 @@ void MenuSelection(int menu_selection)
 		hi_savings.MonthlyStatement();
 		break;
 
+	case 19:
+		cout << "You are withdrawing from a CD account. Any amount(> 0) withdrawn\n"
+			<< "will cause to deactivate account and withdraw the entire funds.\n"
+			<< "A penalty of 3% will be deducted from the total amount if the.\n"
+			<< "maturity month has not been reached.\n";
+		cout << "Enter any amount to withdraw: ";
+		cin >> amount;
+		CD.Withdraw(amount);
+		break;
+
+	case 20:
+		CD.MonthlyStatement();
+		break;
+
 	default:
+		cout << "No valid option was selected.\n";
 		break;
 	}
 }

@@ -31,6 +31,9 @@ public:
 
 	//	Create or set information in account
 	virtual void MonthlyStatement(void);
+
+	//	Not implemented in main program but they can be used for further
+	//	control over the bank accounts.
 	void SetAccountOwnerName(string);
 	void SetAccountNumber(long long int);
 	void SetAccountBalance(double);

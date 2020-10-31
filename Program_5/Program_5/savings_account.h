@@ -17,12 +17,12 @@ public:
 	//	 Constructors
 	SavingsAccount() : BankAccount()
 	{
-		interest_rate = 0.012;
+		interest_rate = 0.008;
 	}
 
 	SavingsAccount(string name, long long int account_number, double balance) : BankAccount(name, account_number, balance)
 	{
-		interest_rate = 0.012;
+		interest_rate = 0.008;
 	}
 
 	void Withdraw(double);
@@ -42,13 +42,13 @@ public:
 	HighInterestSavings() : SavingsAccount()
 	{
 		min_balance = 3000.0;
-		interest_rate = 0.025;
+		interest_rate = 0.015;
 	}
 
 	HighInterestSavings(string name, long long int account_number, double balance) : SavingsAccount(name, account_number, balance)
 	{
 		min_balance = 3000.0;
-		interest_rate = 0.025;
+		interest_rate = 0.015;
 	}
 
 	void Withdraw(double);

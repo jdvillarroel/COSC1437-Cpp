@@ -72,13 +72,13 @@ public:
 	NoServiceChargeChecking() : CheckingAccount()
 	{
 		min_balance = 1000.0;
-		interest_rate = 0.01;
+		interest_rate = 0.001;
 	}
 
 	NoServiceChargeChecking(string name, long long int account_number, double balance) : CheckingAccount(name, account_number, balance)
 	{
 		min_balance = 1000.0;
-		interest_rate = 0.01;
+		interest_rate = 0.001;
 	}
 
 	void WriteCheck(double);
@@ -97,13 +97,13 @@ public:
 	HighInterestChecking() : NoServiceChargeChecking()
 	{
 		min_balance = 3000;
-		interest_rate = 0.05;
+		interest_rate = 0.008;
 	}
 
 	HighInterestChecking(string name, long long int account_number, double balance) : NoServiceChargeChecking(name, account_number, balance)
 	{
 		min_balance = 3000;
-		interest_rate = 0.05;
+		interest_rate = 0.008;
 	}
 };
 

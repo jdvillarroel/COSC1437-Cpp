@@ -3,12 +3,20 @@
 //	Function definition for checking accounts base class
 //============================================================
 
+/// <summary>
+/// Common function to all checking account types.
+/// </summary>
+/// <param name="check_amount"></param>
 void CheckingAccount::WriteCheck(double check_amount)
 {
 	BankAccount::Withdraw(check_amount);
 	checks_written++;
 }
 
+/// <summary>
+/// Prints basic information common to all checking account types.
+/// </summary>
+/// <param name=""></param>
 void CheckingAccount::MonthlyStatement(void)
 {
 	BankAccount::MonthlyStatement();
@@ -20,6 +28,11 @@ void CheckingAccount::MonthlyStatement(void)
 //	Function definition for service charge checking accounts
 //============================================================
 
+/// <summary>
+/// Write checks for service charge checking account. After verifying the account
+/// is in good standing, the check can be written by calling the parent class function.
+/// </summary>
+/// <param name="check_amount"></param>
 void ServiceChargeChecking::WriteCheck(double check_amount)
 {
 	//	Only if account is active can proceed.
@@ -29,7 +42,7 @@ void ServiceChargeChecking::WriteCheck(double check_amount)
 		return;
 	}
 
-	//	Only when number of checks emiited are less than maximum allowed and customer has
+	//	Only when number of checks written are less than maximum allowed and customer has
 	//	enough balance the check can be emitted.
 	if ((checks_written < MAX_NUM_CHECKS) && (balance_ - check_amount) >= 0)
 	{
@@ -44,6 +57,11 @@ void ServiceChargeChecking::WriteCheck(double check_amount)
 	}
 }
 
+/// <summary>
+/// Only after veriying the account complies with the requirements of its type, the operation
+/// can be done by calling the base class withdraw function.
+/// </summary>
+/// <param name="withdraw_amount"></param>
 void ServiceChargeChecking::Withdraw(double withdraw_amount)
 {
 	//	Only if account is active can proceed.
@@ -79,12 +97,19 @@ void ServiceChargeChecking::Withdraw(double withdraw_amount)
 	}
 }
 
+/// <summary>
+/// Prints the information related to the account type. This function simulates that
+/// it is called once every month.
+/// </summary>
+/// <param name=""></param>
 void ServiceChargeChecking::MonthlyStatement(void)
 {
 	//	Specific data only for this type of account is added to the monthly statement.
 	CheckingAccount::MonthlyStatement();
 	cout << fixed << showpoint << setprecision(2);
 	cout << "Service Charge: $" << SERVICE_CHARGE << "\n";
+
+	//	Discount from the balance the monthly charge applied to the account.
 	CheckingAccount::Withdraw(SERVICE_CHARGE);
 	cout << "Final Balance: $" << (balance_) << "\n";
 	
@@ -94,6 +119,11 @@ void ServiceChargeChecking::MonthlyStatement(void)
 //	Function definition for no service charge checking accounts
 //============================================================
 
+/// <summary>
+/// Write checks for service charge checking account. After verifying the account
+/// is in good standing, the check can be written by calling the parent class function.
+/// </summary>
+/// <param name="check_amount"></param>
 void NoServiceChargeChecking::WriteCheck(double check_amount)
 {
 	//	Only if account is active can proceed.
@@ -118,6 +148,11 @@ void NoServiceChargeChecking::WriteCheck(double check_amount)
 	}
 }
 
+/// <summary>
+/// Only after veriying the account complies with the requirements of its type, the operation
+/// can be done by calling the base class withdraw function.
+/// </summary>
+/// <param name="withdraw_amount"></param>
 void NoServiceChargeChecking::Withdraw(double withdraw_amount)
 {
 	//	Only if account is active can proceed.
@@ -127,6 +162,7 @@ void NoServiceChargeChecking::Withdraw(double withdraw_amount)
 		return;
 	}
 
+	// Only valid amounts are allowed.
 	if (withdraw_amount <= 0)
 	{
 		cout << "Amount must be greater than zero.\n";
@@ -147,12 +183,19 @@ void NoServiceChargeChecking::Withdraw(double withdraw_amount)
 	}
 }
 
+/// <summary>
+/// Prints the information related to the account type. This function simulates that
+/// it is called once every month.
+/// </summary>
+/// <param name=""></param>
 void NoServiceChargeChecking::MonthlyStatement(void)
 {
 	//	Specific data only for this type of account is added to the monthly statement.
 	CheckingAccount::MonthlyStatement();
 	cout << fixed << showpoint << setprecision(2);
 	cout << "Annual interest rate: " << (interest_rate * 100) << "%\n";
+
+	//	Add to the account the interests gained during the current month.
 	this->Deposit(balance_ * (interest_rate)/12);
 	cout << "Final Balance: $" << (balance_) << "\n";
 }
