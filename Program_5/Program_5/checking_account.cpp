@@ -6,13 +6,13 @@
 void CheckingAccount::WriteCheck(double check_amount)
 {
 	BankAccount::Withdraw(check_amount);
-	checks_emitted++;
+	checks_written++;
 }
 
 void CheckingAccount::MonthlyStatement(void)
 {
 	BankAccount::MonthlyStatement();
-	cout << "Checks Written: " << checks_emitted << "\n";
+	cout << "Checks Written: " << checks_written << "\n";
 }
 
 
@@ -31,14 +31,14 @@ void ServiceChargeChecking::WriteCheck(double check_amount)
 
 	//	Only when number of checks emiited are less than maximum allowed and customer has
 	//	enough balance the check can be emitted.
-	if ((checks_emitted < MAX_NUM_CHECKS) && (balance_ - check_amount) >= 0)
+	if ((checks_written < MAX_NUM_CHECKS) && (balance_ - check_amount) >= 0)
 	{
 		CheckingAccount::WriteCheck(check_amount);
 	}
 	else
 	{
 		cout << "Check cannot be written. Not enough funds or checks limit reached.\n";
-		cout << "Checks written: " << checks_emitted << " of " << MAX_NUM_CHECKS << "\n";
+		cout << "Checks written: " << checks_written << " of " << MAX_NUM_CHECKS << "\n";
 		cout << fixed << showpoint << setprecision(2);
 		cout << "Account Balance: $" << balance_ << "\n";
 	}
@@ -112,7 +112,7 @@ void NoServiceChargeChecking::WriteCheck(double check_amount)
 	{
 		cout << "Check cannot be written. Not enough funds.\n";
 		cout << "A minimum balance of $" << min_balance << " is required.\n";
-		cout << "Checks written: " << checks_emitted << "\n";
+		cout << "Checks written: " << checks_written << "\n";
 		cout << fixed << showpoint << setprecision(2);		
 		cout << "Account Balance: $" << balance_ << "\n";
 	}
@@ -134,7 +134,7 @@ void NoServiceChargeChecking::Withdraw(double withdraw_amount)
 	}
 
 	//	Withdrawals are allowed when enough funds are available. The minimum balance allowed
-	//	in the account is $-10.00 but the account will be arked as inactive.
+	//	in the account is min_balance
 	if ((balance_ - withdraw_amount) >= min_balance)
 	{
 		CheckingAccount::Withdraw(withdraw_amount);

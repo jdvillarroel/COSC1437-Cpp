@@ -105,6 +105,9 @@ ServiceChargeChecking sc_checking("Jesus Villarroel", 9876543210, 5000);
 NoServiceChargeChecking no_sc_checking("Jesus Villarroel", 9876123450, 5000);
 HighInterestChecking hi_checking("Jesus Villarroel", 9876012345, 10000);
 
+SavingsAccount savings("Jesus Villarroel", 1234567890, 3000);
+HighInterestSavings hi_savings("Jesus Villarroel", 1234098765, 8000);
+
 //============================================================
 //					Function prototypes
 //============================================================
@@ -251,6 +254,38 @@ void MenuSelection(int menu_selection)
 
 	case 12:
 		hi_checking.MonthlyStatement();
+		break;
+
+	case 13:
+		cout << "Enter the amount to deposit: ";
+		cin >> amount;
+		savings.Deposit(amount);
+		break;
+
+	case 14:
+		cout << "Enter the amount to withdraw: ";
+		cin >> amount;
+		savings.Withdraw(amount);
+		break;
+
+	case 15:
+		savings.MonthlyStatement();
+		break;
+
+	case 16:
+		cout << "Enter the amount to deposit: ";
+		cin >> amount;
+		hi_savings.Deposit(amount);
+		break;
+
+	case 17:
+		cout << "Enter the amount to withdraw: ";
+		cin >> amount;
+		hi_savings.Withdraw(amount);
+		break;
+
+	case 18:
+		hi_savings.MonthlyStatement();
 		break;
 
 	default:

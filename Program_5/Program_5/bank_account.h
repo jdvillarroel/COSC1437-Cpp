@@ -18,7 +18,6 @@ public:
 	//	Default constructor
 	BankAccount();
 
-	
 	BankAccount(string, long long int, double);
 
 	//	Retrieve information from account
