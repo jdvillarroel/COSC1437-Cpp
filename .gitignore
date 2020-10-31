@@ -5,6 +5,7 @@
 *.vcxproj
 *.filters
 *.user
+*.zip
 
 # Exceptions
 !*.cpp
