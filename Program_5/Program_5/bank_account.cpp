@@ -112,8 +112,8 @@ void BankAccount::MonthlyStatement(void)
 {
 	cout << "\n********** MONTHLY STATEMENT **********\n\n";
 
-	cout << "Customer name: " << name_ << "\n";
-	cout << "Account Number: #" << account_number_ << "\n";
+	cout << "Customer name: " << GetAccountOwnerName() << "\n";
+	cout << "Account Number: #" << GetAccountNumber() << "\n";
 	cout << fixed << showpoint << setprecision(2);
-	cout << "Account Balance: $" << balance_ << "\n";
+	cout << "Account Balance: $" << GetAccountBalance() << "\n";
 }
