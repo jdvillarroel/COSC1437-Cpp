@@ -31,12 +31,11 @@ private:
 	string	month_;
 	int		day_;
 	int		year_;
+	bool	leap_;
 
 public:
 	// Constructors
 	DateOfBirthType();
-
-	DateOfBirthType(string, int, int);
 
 	// Member functions
 	void setMonth(int);
@@ -47,6 +46,7 @@ public:
 	int getDay(void);
 	int getYear(void);
 	string getFullDate(string, int, int);
+	bool isLeapYear(int);
 
 	// Exception handler objects
 	class invalidMoth
@@ -71,6 +71,7 @@ int main()
 	int		month = 0;			// Temporary variables to hold user data entered.
 	int		day = 0;
 	int		year = 0;
+	bool	leap = false;
 
 	DateOfBirthType		birthDate;
 
@@ -85,8 +86,16 @@ int main()
 		cin.ignore(1, '-');
 		cin >> year;
 		cin.ignore(100, '\n');
+		cout << endl;
 
-		
+		try
+		{
+			birthDate.setYear(year);
+		}
+		catch (DateOfBirthType::invalidYear)
+		{
+			cout << "A year must be greater than zero (0)" << endl;
+		}
 
 
 		// Prompt the user to continue or finish program. Any entry different
@@ -129,12 +138,43 @@ DateOfBirthType::DateOfBirthType()
 	month_ = "";
 	day_ = 0;
 	year_ = 0;
+	leap_ = false;
 }
 
-DateOfBirthType::DateOfBirthType(string month, int day, int year)
+bool DateOfBirthType::isLeapYear(int year)
 {
-	// Initialize class variables with parameters passed.
-	month_ = month;
-	day_ = day;
-	year_ = year;
+	// To determine a leap year, it has to pass 3 rules:
+	// 1. It has to be evenly divisible by 4, then it might be leap.
+	// 2. If it is evenly divisible by 4, but also by 100, it is not leap. Unless...
+	// 3. It is also evenly divisible by 400, then it is leap.
+	bool leap = false;
+
+	if (year % 4 == 0)
+		leap = true;
+
+	if (year % 100 == 0)
+		leap = false;
+
+	if (year % 400 == 0)
+		leap = true;
+
+	return leap;
+}
+
+
+void DateOfBirthType::setYear(int year)
+{
+	// If a negative number is entered for year, an exception is thrown.
+	if (year <= 0)
+	{
+		throw invalidYear();
+	}
+	else
+	{
+		// Verify if leap year. It will help in case Feb 29 is entered.
+		leap_ = isLeapYear(year);
+
+		year_ = year;
+	}
+	
 }
